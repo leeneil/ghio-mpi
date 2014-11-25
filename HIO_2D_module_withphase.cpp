@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "fftw3.h"
+#include <fftw3.h>
 #include <time.h>
 
 //---Define parameters---
