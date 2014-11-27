@@ -77,7 +77,7 @@ srand(time(NULL));
 int ID = rand() % 100;
 
 if (argc > 7)
-	id = atoi(argv[7]);
+	ID = atoi(argv[7]);
 
 char dir[128];
 sprintf(dir,"%s_%d",filename,ID);
