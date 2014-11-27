@@ -76,6 +76,9 @@ support2 = (floor(N/2.0)-1) + floor(S/2);
 srand(time(NULL));
 int ID = rand() % 100;
 
+if (argc > 7)
+	id = atoi(argv[7]);
+
 char dir[128];
 sprintf(dir,"%s_%d",filename,ID);
 mkdir(dir,0755);
