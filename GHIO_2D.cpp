@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 
 int i,j;
 
-std::cout<< "initializing... " << std::endl;
+
 
 // Initialize MPI
 int nproc, myid;
@@ -95,6 +95,9 @@ if (myid==0){
 	}
 	fclose(fin);
 }
+
+if (myid==0)
+	cout<< "initializing... " << endl;
 
 // broadcast intensity to other nodes
 MPI_Bcast(intensity, n1*n2, MPI_DOUBLE, 0, MPI_COMM_WORLD);
