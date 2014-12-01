@@ -92,11 +92,12 @@ double* shift_and_invert(double* shift_model,double* shift_template,int n1,int n
 		for (j=0;j<n2;j++)
 			out1[j+n1*i] = out[j+n1*i][0] / N;
 	}
-	FILE *fout;
-    fout = fopen("invert.dat","wb");
-    fwrite(out1,sizeof(double),n1*n2,fout);
-    fclose(fout);
-	free(out1);
+    
+	// FILE *fout;
+ //    fout = fopen("invert.dat","wb");
+ //    fwrite(out1,sizeof(double),n1*n2,fout);
+ //    fclose(fout);
+	// free(out1);
 
     // normalze "out" and start to shift the inverted shift_model
     for (a=-step;a<step+1;a++){
