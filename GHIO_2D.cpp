@@ -113,8 +113,8 @@ fftw_complex *in,*out;
 fftw_plan forward_p,inverse_p;
 in = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * n1*n2);
 out = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * n1*n2);
-forward_p = fftw_plan_dft_2d(n1, n2, out, in,FFTW_FORWARD, FFTW_MEASURE);
-inverse_p = fftw_plan_dft_2d(n1, n2, in, out,FFTW_BACKWARD, FFTW_MEASURE);
+forward_p = fftw_plan_dft_2d(n1, n2, out, in, FFTW_FORWARD,  FFTW_MEASURE);
+inverse_p = fftw_plan_dft_2d(n1, n2, in, out, FFTW_BACKWARD, FFTW_MEASURE);
 
 double **image_tmp=(double **)malloc(sizeof(double*) *(n1*n2)*num);
 for (i=0;i<n1*n2;i++)
@@ -229,28 +229,24 @@ double shift_max=0;
 
 for (int t=0;t<num;t++){
 	
-	for (i=0;i<n1;i++){
+	for (i=0;i<n1;i++)
 		for (j=0;j<n2;j++)
 			shift_model[j+n1*i] = image_tmp[j+n1*i][t];
-	}
 	
-	for (i=0;i<n1*n2;i++){
+	for (i=0;i<n1*n2;i++)
 		if (shift_max < shift_model[i])
 			shift_max = shift_model[i];
-	}
 
-	for (i=0;i<n1;i++){
+	for (i=0;i<n1;i++)
 		for (j=0;j<n2;j++)
 			shift_model[j+n1*i] = shift_model[j+n1*i]*(temp_max/shift_max);
-	}
 
 	outcome = shift_and_invert(shift_model,shift_template,n1,n2,step,support1,support2);
 
 	// Now image_tmp stores the images which have been shifted or inverted.
-	for (i=0;i<n1;i++){
+	for (i=0;i<n1;i++)
 		for (j=0;j<n2;j++)
 			image_tmp[j+n1*i][t] = outcome[j+n1*i]*(shift_max/temp_max);
-	}
 }
 
 double *shift=(double *)malloc(sizeof(double) *n1*n2);
@@ -259,10 +255,9 @@ for (int q=1;q < gen;q++){
 	
 	for (int t=0;t<num;t++){
 
-		for (i=0;i<n1;i++){
+		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++)
 				shift[j+n1*i] = image_tmp[j+n1*i][t];
-		}
 
 		// apply geometric average
 		for (i=0;i<n1;i++){
@@ -274,26 +269,25 @@ for (int q=1;q < gen;q++){
 			}
 		}
 		
-		for (i=0;i<n1;i++){
+		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++)
 				HIOinput[i][j] = intensity[j+n1*i];
-		}
 
 		M = HIO_2D_withphase(HIOinput, n1, n2, support1, support2, iteration, shift);
 
 		// save M in image_tmp[t]
-		for (i=0;i<n1;i++){
+		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++)
 				image_tmp[j+n1*i][t] = M[i][j];
-		}
+
 
 		// calculate errorF
-		for (i=0;i<n1;i++){
+		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++){
 				out[j+n1*i][0]=M[i][j];
 				out[j+n1*i][1]=0;
 			}
-		}
+
 		fftw_execute(forward_p);
 		norm = 0;
 		for (i=0;i<n1;i++){
