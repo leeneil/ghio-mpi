@@ -232,17 +232,15 @@ double **HIO_2D_withphase(double **HIOinput, int n1, int n2, int support1, int s
 	for (i=0;i<n1;i++)
 		HIOoutput[i]=(double *)malloc(sizeof(double) *n2);
 
-	for (i=0;i<n1;i++){
+	for (i=0;i<n1;i++)
     	for (j=0;j<n2;j++)
         	HIOoutput[i][j]=out[j+n1*i][0]/N;
-    }
 
     fftw_destroy_plan(forward_p);
     fftw_destroy_plan(inverse_p);
     
 	free(previous);
-	free(checker);
-    free(in);
-    free(out);
+	free(checker);   
+
     return HIOoutput;
 }
