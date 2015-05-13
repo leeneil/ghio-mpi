@@ -11,7 +11,7 @@
 
 using namespace std;
 
-double **HIO_2D_withphase(double **HIOinput, int n1, int n2, int support1, int support2, int iteration, double *shift)
+void HIO_2D_withphase(double **HIOinput, double **HIOoutput, int n1, int n2, int support1, int support2, int iteration, double *shift)
 {   
     // The input intensity should not be fft-shifted.
     // The input matrix should be odd.
@@ -228,12 +228,9 @@ double **HIO_2D_withphase(double **HIOinput, int n1, int n2, int support1, int s
     // Create an array to store output data and release memory
     fftw_execute(inverse_p);
 	    
-	double **HIOoutput=(double **)malloc(sizeof(double*) *n1);
-	for (i=0;i<n1;i++)
-		HIOoutput[i]=(double *)malloc(sizeof(double) *n2);
 
 	for (i=0;i<n1;i++)
-    	for (j=0;j<n2;j++)
+    	for (j=0;j<n2;j++) 
         	HIOoutput[i][j]=out[j+n1*i][0]/N;
 
     fftw_destroy_plan(forward_p);

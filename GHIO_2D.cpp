@@ -120,11 +120,13 @@ double **image_tmp=(double **)malloc(sizeof(double*) *(n1*n2)*num);
 for (i=0;i<n1*n2;i++)
 	image_tmp[i]=(double *)malloc(sizeof(double) *num);
 
-double **HIOinput=(double **)malloc(sizeof(double*) *n1*n2);
+double **HIOinput=(double **)malloc(sizeof(double*) *n1);
 for (i=0;i<n1;i++)
 	HIOinput[i]=(double *)malloc(sizeof(double) *n2);
+double **HIOoutput=(double **)malloc(sizeof(double*) *n1);
+for (i=0;i<n1;i++)
+	HIOoutput[i]=(double *)malloc(sizeof(double) *n2);
 
-double **M;
 for (int t=0;t<num;t++){
 	
 	for (i=0;i<n1;i++){
@@ -133,18 +135,18 @@ for (int t=0;t<num;t++){
 	}
 	
 	// It should be careful that values of HIOinput would change after used by HIO_2D.
-	M = HIO_2D(HIOinput, n1, n2, support1, support2, iteration, myid);
+	HIO_2D(HIOinput, HIOoutput, n1, n2, support1, support2, iteration, myid);
 	
 	// save M in image_tmp[t]
 	for (i=0;i<n1;i++){
 		for (j=0;j<n2;j++)
-			image_tmp[j+n1*i][t] = M[i][j];
+			image_tmp[j+n1*i][t] = HIOoutput[i][j];
 	}
 	
 	// calculate errorF
 	for (i=0;i<n1;i++){
 		for (j=0;j<n2;j++){
-			out[j+n1*i][0]=M[i][j];
+			out[j+n1*i][0]=HIOoutput[i][j];
 			out[j+n1*i][1]=0;
 		}
 	}
@@ -214,7 +216,7 @@ if (myid==0){
 	FILE *fout = fopen(fn, "w");
 	fwrite(shift_template,sizeof(double),n1*n2,fout);
 	fclose(fout);
-	printf("This is the 1-th generation.\n");
+	printf("It was the 1-st generation.\n");
 }
 
 double temp_max=0;
@@ -273,18 +275,18 @@ for (int q=1;q < gen;q++){
 			for (j=0;j<n2;j++)
 				HIOinput[i][j] = intensity[j+n1*i];
 
-		M = HIO_2D_withphase(HIOinput, n1, n2, support1, support2, iteration, shift);
+		HIO_2D_withphase(HIOinput, HIOoutput, n1, n2, support1, support2, iteration, shift);
 
 		// save M in image_tmp[t]
 		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++)
-				image_tmp[j+n1*i][t] = M[i][j];
+				image_tmp[j+n1*i][t] = HIOoutput[i][j];
 
 
 		// calculate errorF
 		for (i=0;i<n1;i++)
 			for (j=0;j<n2;j++){
-				out[j+n1*i][0]=M[i][j];
+				out[j+n1*i][0]=HIOoutput[i][j];
 				out[j+n1*i][1]=0;
 			}
 
