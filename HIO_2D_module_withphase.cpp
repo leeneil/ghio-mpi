@@ -238,6 +238,4 @@ void HIO_2D_withphase(double **HIOinput, double **HIOoutput, int n1, int n2, int
     
 	free(previous);
 	free(checker);   
-
-    return HIOoutput;
 }

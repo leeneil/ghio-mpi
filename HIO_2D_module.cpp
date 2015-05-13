@@ -260,6 +260,4 @@ void HIO_2D(double **HIOinput, double **HIOoutput, int n1, int n2, int support1,
     
 	free(previous);
 	free(checker);   
-
-    return HIOoutput;
 }
