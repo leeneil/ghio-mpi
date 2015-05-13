@@ -387,7 +387,7 @@ free(intensity);
 free(errorF);
 free(image_tmp);
 free(HIOinput);
-free(M);
+free(HIOoutput);
 free(shift_template);
 free(shift_model);
 free(outcome);
