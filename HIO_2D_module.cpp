@@ -258,6 +258,11 @@ void HIO_2D(double **HIOinput, double **HIOoutput, int n1, int n2, int support1,
     fftw_destroy_plan(forward_p);
     fftw_destroy_plan(inverse_p);
     
+    for (i=0;i<n1;i++) {
+        free(previous[i]);
+        free(checker[i]);
+    }
+
 	free(previous);
 	free(checker);
 
