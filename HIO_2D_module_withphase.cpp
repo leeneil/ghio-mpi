@@ -237,5 +237,8 @@ void HIO_2D_withphase(double **HIOinput, double **HIOoutput, int n1, int n2, int
     fftw_destroy_plan(inverse_p);
     
 	free(previous);
-	free(checker);   
+	free(checker);
+
+    fftw_free(in);
+    fftw_free(out);
 }

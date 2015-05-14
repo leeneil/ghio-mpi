@@ -348,7 +348,7 @@ for (int q=1;q < gen;q++){
 		FILE *fout = fopen(fn, "w");
 		fwrite(shift_template,sizeof(double),n1*n2,fout);
 		fclose(fout);
-		printf("This is the %d-th generation.\n", q+1);
+		printf("It was the %d-th generation.\n", q+1);
 	}
 
 	for (i=0;i<n1*n2;i++){
