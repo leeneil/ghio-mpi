@@ -18,7 +18,7 @@ Replaced `/pkg/intel/12/mkl/include/fftw/` with the path of `fftw` in your worki
 # Execution
 
 ```
-mpirun -np NUM_OF_CPUS ./ghio INPUT_FILE INPUT_SIZE SUPPORT_SZ N_ITERS N_GENS N_COPIES
+mpirun -np NUM_OF_CPUS ./ghio2d INPUT_FILE INPUT_SIZE SUPPORT_SZ N_ITERS N_GENS N_COPIES
 ```
 
 * `INPUT_FILE`: Square-root of Fourier intensity. Must be non-FFT-shifted.
