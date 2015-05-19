@@ -21,14 +21,21 @@ Replaced `/pkg/intel/12/mkl/include/fftw/` with the path of `fftw` in your worki
 mpirun -np NUM_OF_CPUS ./ghio INPUT_FILE INPUT_SIZE SUPPORT_SZ N_ITERS N_GENS N_COPIES
 ```
 
-`INPUT_FILE`: Square-root of Fourier intensity. Must be non-FFT-shifted.
-`INPUT_SIZE`: dimension of `INPUT_SIZE`
-`SUPPORT_SZ`: dimension of the square spport
-`N_ITERS`: number of iterations in a generation
-`N_GENS`: number of geneations
-`N_COPIES`: number of independent copies. Multiple of `NUM_CPUS` is recommended.
+* `INPUT_FILE`: Square-root of Fourier intensity. Must be non-FFT-shifted.
 
-example
+* `INPUT_SIZE`: dimension of `INPUT_SIZE`
+
+* `SUPPORT_SZ`: dimension of the square spport
+
+* `N_ITERS`: number of iterations in a generation
+
+* `N_GENS`: number of geneations
+
+* `N_COPIES`: number of independent copies. Multiple of `NUM_CPUS` is recommended.
+
+
+## example
+
 ```
 mpirun -np 20 ./ghio fimg.cdi 1375 311 2000 10 20
 ```
